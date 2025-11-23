@@ -86,6 +86,35 @@
             width: 100%;
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ec4899;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -508,8 +537,51 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+
         /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            nav ul.active li {
+                animation: fadeInUp 0.5s ease forwards;
+            }
+
+            nav ul.active li:nth-child(1) { animation-delay: 0.1s; }
+            nav ul.active li:nth-child(2) { animation-delay: 0.2s; }
+            nav ul.active li:nth-child(3) { animation-delay: 0.3s; }
+            nav ul.active li:nth-child(4) { animation-delay: 0.4s; }
+            nav ul.active li:nth-child(5) { animation-delay: 0.5s; }
+
+            nav a {
+                font-size: 1.2rem;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -527,13 +599,26 @@
                 grid-template-columns: 1fr;
             }
 
-            nav ul {
-                gap: 15px;
-                font-size: 0.9rem;
-            }
-
             .projects-grid,
             .articles-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .logo {
+            font-size: 18px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
         }
